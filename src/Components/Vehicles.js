@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { formatDate } from "./FormateDate";
-import { set } from "mongoose";
 import "../css/Vehicles.css";
 import { API_BASE_URL } from "../apiConfig";
 
