@@ -1,0 +1,16 @@
+html,
+body,
+#root,
+.layout {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  /* overflow-x: hidden; */
+}
+
+@media (min-width: 768px) {
+  .content {
+    margin-top: 100px;
+  }
+}

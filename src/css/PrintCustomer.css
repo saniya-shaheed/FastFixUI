@@ -1,0 +1,68 @@
+/* Makes print-header and print-footer visible when printing */
+@media print {
+  .navbar,
+  .sidebar,
+  .edit-print-buttons,
+  .details-heading {
+    display: none !important;
+  }
+  .print-header,
+  .print-footer {
+    display: block !important;
+    font-weight: bold;
+  }
+
+  .print-header p {
+    font-weight: bold;
+  }
+
+  .social-icons {
+    justify-content: space-between;
+  }
+
+  svg {
+    fill: black;
+  }
+  .print-header hr,
+  .print-footer hr {
+    border: 2px solid black;
+  }
+
+  /* Ensure the layout looks good in print */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .labels-at-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .labels-at-top div {
+    width: 50%;
+  }
+
+  .regno-brand p {
+    width: 50%;
+  }
+
+  .print-logo {
+    width: 50%; /* Adjust size as needed */
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+}

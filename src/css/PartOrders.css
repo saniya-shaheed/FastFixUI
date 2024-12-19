@@ -1,0 +1,45 @@
+.items-list {
+  font-size: 1rem;
+}
+
+.add-item-partorder-btn {
+  background-color: "transparent";
+  border: "none";
+  cursor: "pointer";
+  font-size: "1.5rem";
+  color: "#007bff";
+}
+
+@media (min-width: 2560px) {
+  .part-orders,
+  .part-details,
+  .add-partorders,
+  .add-partorders {
+    font-size: 2rem;
+  }
+
+  .part-orders h1,
+  .part-details h1,
+  .add-partorders h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .items-list {
+    font-size: 2rem;
+  }
+
+  .items-add-item {
+    padding: 10px 0 !important;
+  }
+
+  .del-checkbox {
+    width: 100%;
+    height: 25px;
+  }
+
+  .add-item-partorder-btn {
+    font-size: 2rem;
+    height: 50px;
+  }
+}

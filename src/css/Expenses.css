@@ -1,0 +1,63 @@
+.add-delete-buttons button {
+  height: 55px;
+}
+
+.add-expense-form {
+  height: 250px;
+  align-items: center;
+}
+
+.add-expense-form button {
+  width: 16rem;
+}
+
+@media (min-width: 2560px) {
+  .expenses {
+    font-size: 2rem;
+  }
+
+  .expenses h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .add-del-month-year {
+    padding: 25px 0 !important;
+  }
+
+  .total-expense {
+    padding: 25px 0;
+    font-size: 3rem;
+  }
+
+  .add-expense {
+    font-size: 2rem;
+  }
+
+  .add-expense h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .add-expense form {
+    padding-top: 150px;
+  }
+
+  .expense-label {
+    padding: 10px 10px;
+  }
+
+  .add-expense-button {
+    padding: 30px 0 !important;
+  }
+
+  .add-expense-button button {
+    font-size: 2rem;
+    height: 80px;
+  }
+
+  .del-selected-expense button {
+    height: 60px;
+    font-size: 2rem;
+  }
+}

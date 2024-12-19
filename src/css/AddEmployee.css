@@ -1,0 +1,53 @@
+.edit-btn {
+  background-color: #0b3f67;
+  color: #fff;
+}
+form .d-sm-flex {
+  justify-content: space-between;
+}
+
+form .btn {
+  background-color: #0b3f67;
+  color: #fff;
+}
+
+form .btn:hover {
+  background-color: #fff;
+  color: #0b3f67;
+}
+
+@media (min-width: 2560px) {
+  .add-employee,
+  .employee-details {
+    font-size: 2rem;
+  }
+
+  .add-employee h1,
+  .employee-details h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .form-control {
+    font-size: 2rem;
+  }
+
+  .add-employee-button button {
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .edit-btn {
+    font-size: 2rem;
+    height: 60px;
+  }
+
+  .save-cancel-button {
+    padding: 100px 0 !important;
+  }
+
+  .save-cancel-button button {
+    height: 60px;
+    font-size: 2rem;
+  }
+}

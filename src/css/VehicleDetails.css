@@ -1,0 +1,121 @@
+h1 {
+  color: #0b3f67;
+}
+
+p {
+  font-weight: normal;
+}
+
+th,
+td,
+tr {
+  border: 1px solid black;
+}
+th {
+  color: black;
+}
+
+.edit-print-buttons {
+  justify-content: space-evenly;
+}
+.edit-print-buttons button {
+  background-color: #0b3f67;
+  color: #fff;
+}
+
+.edit-print-buttons button:hover {
+  background-color: #fff;
+  color: #0b3f67;
+}
+
+.edit-form button {
+  background-color: #0b3f67;
+  color: #fff;
+}
+
+.edit-services h6 {
+  color: #0b3f67;
+}
+.edit-form button:hover {
+  background-color: #fff;
+  color: #0b3f67;
+}
+
+.print-header,
+.print-footer {
+  display: none;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+.table {
+  min-width: 600px; /* Set a minimum width for your table */
+}
+
+@media (min-width: 576px) {
+  .amounts {
+    justify-content: space-between;
+  }
+}
+@media (min-width: 768px) {
+  .labels-at-top {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date-id {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .amounts {
+    justify-content: space-between;
+  }
+}
+@media (min-width: 2560px) {
+  .vehicle-details {
+    font-size: 2rem;
+  }
+
+  .vehicle-details h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .edit-print-buttons button {
+    height: 65px;
+    font-size: 2rem;
+  }
+
+  .edit-form {
+    padding-top: 20px;
+  }
+
+  .edit-form .form-control {
+    font-size: 2rem;
+  }
+
+  .edit-group {
+    padding: 20px 0;
+  }
+
+  .edit-services {
+    padding: 20px 0;
+  }
+
+  .edit-services h6 {
+    font-size: 2.5rem;
+  }
+
+  .paid-amount-edit {
+    padding: 20px 0;
+  }
+  .edit-form button {
+    height: 60px;
+    font-size: 2rem;
+  }
+}

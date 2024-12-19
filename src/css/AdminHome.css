@@ -1,0 +1,158 @@
+/*
+.adminhome {
+  background-image: url('C:\Users\Admin\FastFix-Automaintanence\fastfix-admin-frontend\public\images\adminhome_bg.jpg');
+  
+
+
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+} */
+
+.admin-home-content {
+  background: #0b3f67;
+  border: 5px solid white;
+  border-radius: 20px;
+  height: 410px;
+}
+
+.admin-home-content img {
+  height: 60px;
+}
+
+.admin-home-content h2 {
+  font-family: serif;
+  color: #fff;
+}
+
+.admin-home-content input {
+  height: 25px;
+}
+
+.admin-home-content button {
+  background-color: #fff;
+  color: #0b3f67;
+  border: 5px solid #97bedc;
+  /* margin: '20px auto';
+            padding: '10px 20px';
+            cursor: pointer;*/
+}
+
+.admin-home-content p {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-button button {
+  background-color: #315f85 !important;
+}
+
+.login-button button:hover {
+  background-color: #fff;
+  color: #0b3f67;
+}
+
+.sign-up {
+ /* background-image: url('C:\Users\Admin\FastFix-Automaintanence\fastfix-admin-frontend\public\images\adminhome_bg1.jpg');
+
+
+
+  background-position: center;
+  background-size: cover;
+  */
+} 
+
+@media (min-width: 768px) {
+  .admin-home-content {
+    /* height: 380px; */
+  }
+
+  .admin-home-content img {
+    height: 80px;
+  }
+
+  .left-content h2 {
+    font-size: 2rem;
+  }
+
+  .left-content h1 {
+    font-size: 5rem;
+  }
+
+  .left-login-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .left-login-content h1 {
+    font-size: 3rem;
+  }
+
+  .left-login-content h2 {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1440px) {
+  .admin-home-content form {
+    margin-top: 25px;
+  }
+
+  .admin-home-content input {
+    height: 30px;
+  }
+}
+@media (min-width: 2560px) {
+  .admin-home-content {
+    height: 800px;
+    margin-top: 50px;
+  }
+
+  .xl-form {
+    margin-top: 70px;
+  }
+  .admin-home-content input {
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .admin-home-content button {
+    width: 50%;
+    height: 50px;
+    font-size: 2rem;
+  }
+
+  .admin-home-content img {
+    height: 180px;
+  }
+
+  .admin-home-content h2 {
+    font-size: 3rem;
+  }
+
+  .left-content h2 {
+    font-size: 4rem;
+  }
+
+  .left-content h1 {
+    font-size: 11rem;
+  }
+
+  .xl-form input {
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .login-button button {
+    height: 80px;
+  }
+
+  .left-login-content h2 {
+    font-size: 5rem;
+  }
+
+  .left-login-content h1 {
+    font-size: 7rem;
+  }
+}

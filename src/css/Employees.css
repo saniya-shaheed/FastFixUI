@@ -1,0 +1,36 @@
+.employee-add-delete-button button,
+.delete-employee {
+  background-color: #0b3f67;
+  color: #fff;
+}
+
+.employee-add-delete-button button:hover,
+.delete-employee:hover {
+  background-color: #fff;
+  color: #0b3f67;
+}
+
+@media (min-width: 2560px) {
+  .employees {
+    font-size: 2rem;
+  }
+
+  .employees h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .employee-add-delete-button button {
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .employee-table {
+    padding-top: 60px !important;
+  }
+
+  .delete-employee {
+    font-size: 2rem;
+    height: 60px;
+  }
+}

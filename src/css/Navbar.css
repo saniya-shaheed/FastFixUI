@@ -1,0 +1,80 @@
+.navbar {
+  background-color: #0b3f67 !important;
+  height: 100px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.image-logo {
+  height: 40px;
+}
+
+.image-name {
+  height: 60px;
+}
+
+.align-md {
+  align-items: center;
+}
+
+.greeting {
+  background-color: #1a5888;
+  color: #fff;
+  justify-content: space-between;
+}
+
+.btn {
+  background-color: #fff;
+  border: 1px solid #1a5888;
+  color: #0b3f67;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn:hover {
+  background-color: #1a5888;
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .greeting {
+    background-color: #0b3f67;
+    justify-content: end;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 2560px) {
+  .navbar {
+    height: 150px;
+  }
+
+  .image-logo {
+    height: 80px;
+  }
+
+  .image-name {
+    height: 130px;
+  }
+
+  .greeting {
+    font-size: 2.45rem;
+  }
+
+  .notification-logout svg {
+    height: 50px;
+  }
+
+  .navbar button {
+    height: 60px;
+    width: 15rem;
+    font-size: 1.85rem;
+  }
+}

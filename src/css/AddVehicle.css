@@ -1,0 +1,99 @@
+h1 {
+  color: #0b3f67;
+}
+
+hr {
+  background-color: #0b3f67;
+  height: 3px !important;
+  border: none;
+}
+
+label,
+p {
+  font-weight: bold;
+}
+
+.services-heading {
+  color: #35546c;
+  font-weight: bold;
+}
+
+.services th {
+  color: #35546c;
+}
+
+.services input {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.form-check-label {
+  font-weight: normal;
+}
+
+.add-customer-button .btn {
+  background-color: #0b3f67;
+  color: #fff;
+  height: 50px;
+}
+
+.add-customer-button .btn:hover {
+  border: 1px solid #0b3f67;
+  background-color: #fff;
+  color: #0b3f67;
+}
+@media (min-width: 576px) {
+  .label-group {
+    justify-content: space-between;
+  }
+
+  .label-group .col-sm-6 {
+    width: 49%;
+  }
+
+  .label-group .col-sm-4 {
+    width: 32%;
+  }
+}
+
+@media (min-width: 768px) {
+  .radio-buttons {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 2560px) {
+  .add-vehicle {
+    font-size: 2rem;
+  }
+
+  .add-vehicle h1 {
+    font-size: 5rem;
+    padding: 50px 0;
+  }
+
+  .status-of-work {
+    padding-top: 20px;
+  }
+
+  .add-vehicle input {
+    font-size: 2rem;
+  }
+
+  .services-heading {
+    font-size: 2.5rem;
+  }
+
+  .add-service-button button {
+    font-size: 3rem !important;
+  }
+
+  .add-vehicle .form-control {
+    font-size: 2rem;
+  }
+
+  .add-customer-button button {
+    font-size: 2rem;
+    height: 80px !important;
+  }
+}
