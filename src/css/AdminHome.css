@@ -1,13 +1,13 @@
-/*
+
 .adminhome {
-  background-image: url('C:\Users\Admin\FastFix-Automaintanence\fastfix-admin-frontend\public\images\adminhome_bg.jpg');
+  background-image: url('/public/images/adminhome_bg.jpg');
   
 
 
   background-size: cover;
   background-position: center;
   height: 100vh;
-} */
+} 
 
 .admin-home-content {
   background: #0b3f67;
@@ -54,13 +54,13 @@
 }
 
 .sign-up {
- /* background-image: url('C:\Users\Admin\FastFix-Automaintanence\fastfix-admin-frontend\public\images\adminhome_bg1.jpg');
+ background-image: url('/public/images/adminhome_bg1.jpg');
 
 
 
   background-position: center;
   background-size: cover;
-  */
+  
 } 
 
 @media (min-width: 768px) {
