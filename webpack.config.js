@@ -11,5 +11,10 @@ module.exports = {
         }
       }
     ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'build'), // Ensure build directory
+    filename: 'static/js/[name].[contenthash:8].js',
+    publicPath: '/' // Serve files correctly
   }
 };
