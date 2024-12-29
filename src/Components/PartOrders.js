@@ -205,7 +205,10 @@ const PartOrders = () => {
                     )}
                   </ul>
                 </td>
-                <td className="text-center">{order.totalAmount}</td>
+                <td className="text-center">{order.totalAmount.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}</td>
                 <td>{order.supplier}</td>
                 <td>{order.phone}</td>
                 <td>{order.targetVehicle}</td>

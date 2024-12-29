@@ -60,9 +60,21 @@
   }
 
   .print-logo {
-    width: 50%; /* Adjust size as needed */
-    height: 100px;
+    width: 100%; /* Adjust size as needed */
+    height: 150px;
     margin-bottom: 10px;
     padding: 0;
+  }
+
+  .print-none {
+    display: none;
+  }
+
+  .print-preview {
+    padding-top: 0 !important;
+  }
+
+  .print-finishdate {
+    text-align: start!important;
   }
 }

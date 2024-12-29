@@ -74,6 +74,8 @@ function PartDetails() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
+  
+
   return (
     <section className="part-details p-4 pt-sm-5 p-md-5">
       {!isEditing ? (
@@ -119,7 +121,7 @@ function PartDetails() {
                 <thead>
                   <tr>
                     <th>Item</th>
-                    <th>Amount (AED)</th>
+                    <th>Unit Price (AED)</th>
                     <th>Quantity</th>
                     <th>Total (AED)</th>
                   </tr>
@@ -128,9 +130,15 @@ function PartDetails() {
                   {orders.parts.map((part, index) => (
                     <tr key={index}>
                       <td>{part.item}</td>
-                      <td>{part.amount}</td>
+                      <td>{part.amount.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}</td>
                       <td>{part.quantity}</td>
-                      <td>{part.totalPrice}</td>
+                      <td>{part.totalPrice.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -140,7 +148,10 @@ function PartDetails() {
 
           <div className="amounts d-sm-flex pt-3">
             <p>
-              <strong>Total Amount: AED {orders.totalAmount}</strong>
+              <strong>Total Amount: AED {orders.totalAmount.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}</strong>
             </p>
           </div>
         </div>

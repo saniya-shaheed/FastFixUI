@@ -14,6 +14,7 @@ function VehicleDetails() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [printType, setPrintType] = useState("");
 
   useEffect(() => {
     axios
@@ -29,11 +30,14 @@ function VehicleDetails() {
       });
   }, [id]);
 
+  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  
   const handleServiceChange = (index, field, value) => {
     const updatedServices = [...formData.services];
     updatedServices[index][field] = value;
@@ -41,7 +45,7 @@ function VehicleDetails() {
   };
 
   const addService = () => {
-    const newService = { serviceType: "", amount: 0, quantity: 1 };
+    const newService = { serviceType: "", unitPrice: 0, quantity: 1 , vat:0};
     setFormData({
       ...formData,
       services: [...formData.services, newService],
@@ -72,9 +76,14 @@ function VehicleDetails() {
       });
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handlePrint =  (type) => {
+    setPrintType(type);
+    setTimeout(() => { 
+      window.print();
+    }, 0)
+   
   };
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -85,18 +94,17 @@ function VehicleDetails() {
         <div className="">
           <div className="">
             <img
-              src="/images/fastfix_printheader.png"
+              src="/images/fastfixauto.jpg"
               alt="FastFix Automaintenance Logo"
               className=" print-logo"
             />
 
-            <p className="ps-3">
-              Industrial Area 5, Sharjah
-              <br />
-              0529479330, 055656616
+            <p className="ps-3 pb-0 mb-0 text-center">
+              Industrial Area 5, Sharjah, Ph: 0529479330, 055656616
+              
             </p>
           </div>
-          <div className="ps-3 d-flex social-icons">
+          <div className="ps-3 pt-0 mt-0 d-flex social-icons">
             <p className="align-items-center d-flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,120 +135,154 @@ function VehicleDetails() {
               >
                 <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
               </svg>
-              <span> Faast Fix Auto Maintanence </span>
+              <span> Fast Fix Auto Maintanence </span>
             </p>
           </div>
         </div>
-        <hr />
+        <hr className="pt-0 mt-0"/>
+        {printType === "invoice" && <h6 className="text-center"><u> PAYMENT RECIEPT </u></h6>}
+        {printType === "quotation" && <h6 className="text-center"><u> QUOTATION</u> </h6>}
       </header>
 
       <h1 className="details-heading">{vehicle.customerName}</h1>
       <hr />
+ 
 
       {!isEditing ? (
-        <div className="pt-sm-3">
+        <div className="pt-sm-3 print-preview">
           <div className="d-md-flex labels-at-top">
             <div className="col-md-6">
-              <p>
-                <strong>Customer Name:</strong> {vehicle.customerName}
-              </p>
-              <p>
-                <strong>Phone:</strong> {vehicle.phone}
-              </p>
-            </div>
-            <div className="col-md-6 date-id">
-              <p>
-                <strong>Date:</strong> {formatDate(vehicle.date)}
-              </p>
-              <p>
                 <strong>Customer ID:</strong> {vehicle.vehicleId}
-              </p>
+            <br />
+                <strong>Customer Name:</strong> {vehicle.customerName}
+             <br />
+             <strong>Vehicle: </strong> {vehicle.vehicleRegNo}{" "} {vehicle.brand}{" "}
+             {vehicle.vehicleModel}{" "}
+             <br />
+             <strong>Vehicle Analysis:</strong> {vehicle.vehicleAnalysis}
+             
+          
+              
+            </div>
+            <div className="col-md-6 ">
+            
+                <strong>Date:</strong> {formatDate(vehicle.date)}
+              <br />
+                <strong>Phone:</strong> {vehicle.phone}
+                <br />
+                <strong>Mileage: </strong> {vehicle.mileage}
+                <br />
+                <strong>Parts & Supplies:</strong> {vehicle.spareParts}
+              
             </div>
           </div>
-          <div className="d-md-flex labels-at-top regno-brand pb-2">
-            <p className="col-md-4">
-              <strong>Vehicle Reg No:</strong> {vehicle.vehicleRegNo}
-            </p>
-            <p className="col-md-4">
-              <strong>Brand & Model:</strong> {vehicle.brand}{" "}
-              {vehicle.vehicleModel}{" "}
-            </p>
-            <p className="col-md-4">
-              <strong>Mileage: </strong> {vehicle.mileage}
-            </p>
-          </div>
-
-          <div className="d-md-flex labels-at-top regno-brand pb-2">
-            {vehicle.vehicleAnalysis && (
-              <p className="col-md-6">
-                <strong>Vehicle Analysis:</strong> {vehicle.vehicleAnalysis}
-              </p>
-            )}
-            {vehicle.spareParts && (
-              <p className="col-md-6">
-                <strong>Parts & Supplies:</strong> {vehicle.spareParts}
-              </p>
-            )}
-          </div>
-          <div className="table-responsive pt-2 pb-2 pt-xl-4 pb-xl-4">
+      
+          <div className="table-responsive pt-3 pb-2 pt-xl-4 pb-xl-4">
             <table className=" table table-bordered">
               <thead>
                 <tr>
                   <th>Service</th>
-                  <th>Amount (AED)</th>
+                  <th>Unit Price (AED)</th>
                   <th>Quantity</th>
-                  <th>Total (AED)</th>
+                  <th> VAT (5%) </th>
+                  <th>Subtotal (AED)</th>
                 </tr>
               </thead>
               <tbody>
                 {vehicle.services.map((service, index) => (
                   <tr key={index}>
                     <td>{service.serviceType}</td>
-                    <td>{service.amount}</td>
+                    <td>{service.unitPrice.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
                     <td>{service.quantity}</td>
-                    <td>{service.totalPrice}</td>
+                    <td>{service.vat.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
+                    <td>{service.subTotal.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
                   </tr>
+                
                 ))}
+                  <tr className="amount-columns">
+                    <td colspan="4">Total </td>
+                    <td>{vehicle.totalAmount.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
+                  </tr>
+                <tr className={`amount-columns ${vehicle.discount === 0 ? 'print-none' : ''}`}>
+  <td colspan="4">Discount</td>
+  <td>{vehicle.discount.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
+</tr>
+
+                  <tr className="amount-columns" >
+                    <td colspan="4">Due Amount </td>
+                    <td>{vehicle.dueAmount.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}</td>
+                  </tr>
+
               </tbody>
             </table>
           </div>
 
           <div className="amounts d-sm-flex">
-            <p>
-              <strong>Total Amount:</strong> AED {vehicle.totalAmount}
+           
+            <p className="print-none ">
+              <strong>Paid Amount:</strong> AED {vehicle.paidAmount.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}
             </p>
-            <p>
-              <strong>Paid Amount:</strong> AED {vehicle.paidAmount}
-            </p>
-            <p>
-              <strong>Pending Amount:</strong> AED {vehicle.pendingAmount}
+            <p className="print-none ">
+              <strong>Pending Amount:</strong> AED {vehicle.pendingAmount.toLocaleString(undefined, { 
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 
+  })}
             </p>
           </div>
           <div className="d-sm-flex date-status">
-            <p className="col-sm-6">
+          <p className="print-none col-sm-4">
+              <strong>Payment Method:</strong> {vehicle.paymentMethod}
+            </p>
+            <p className="print-none text-sm-center col-sm-4">
               <strong>Status:</strong> {vehicle.statusOfWork}
             </p>
-            {vehicle.pendingAmount === 0 && (
-              <p className="col-sm-6">
-                <strong>Date Finished:</strong> {formatDate(vehicle.finishDate)}
-              </p>
-            )}
+            {vehicle.pendingAmount === 0 &&  (
+    <p  className={`col-sm-4 print-finishdate text-sm-end ${
+      printType === "quotation" ? "print-none" : ""
+    }`}>
+      <strong>Date Finished:</strong> {formatDate(vehicle.finishDate)}
+    </p>
+  )}
           </div>
 
-          <div className="pt-3 pb-5 d-flex edit-print-buttons">
-            <button className="btn col-6 col-sm-4 " onClick={handleEditToggle}>
+          <div className="pt-3 pb-5 d-flex edit-print-buttons ">
+            <button className="btn col-4 col-sm-3 " onClick={handleEditToggle}>
               Edit Details
             </button>
-            <button className="btn col-6 col-sm-4" onClick={handlePrint}>
-              Print
+            <button className="btn col-4 col-sm-3" onClick={()=>handlePrint("invoice")}>
+              Print Invoice
+            </button>
+            <button className="btn col-4 col-sm-3  " onClick={()=>handlePrint("quotation")}>
+              Print Quotation
             </button>
           </div>
 
           <div className="print-footer">
             <hr />
             <div className="d-flex">
-              <div className="col-6"> FastFix Automaintanence </div>
-              <div className="col-6 d-flex justify-content-center"> Admin </div>
+              <div className="col-6"> Reciever's Signature </div>
+              <div className="col-6 d-flex justify-content-center"> Signature </div>
             </div>
           </div>
         </div>
@@ -359,6 +401,11 @@ function VehicleDetails() {
               Add Service
             </button>
           </div>
+          <p style={{color:"red", fontSize:"0.75rem"}} > 
+          Modifying the Unit Price, Quantity, or Discount will automatically update the VAT, Subtotal, and Due Amount once the changes are saved. <br />
+          If the VAT remains the same, ensure the VAT field is left empty before saving to reflect the correct updated value. <br />
+          If VAT needs to be 0, enter 0 before saving.
+             </p>
 
           <div className="table-responsive">
             <table className="table">
@@ -367,6 +414,8 @@ function VehicleDetails() {
                   <th scope="">Service Type</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Quantity</th>
+                  <th scope="col">VAT (5%) </th>
+                  <th scope="col"> Subtotal (AED) </th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -392,11 +441,14 @@ function VehicleDetails() {
                       <input
                         type="number"
                         className="form-control"
-                        value={service.amount}
+                        value={service.unitPrice.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}
                         onChange={(e) =>
-                          handleServiceChange(index, "amount", e.target.value)
+                          handleServiceChange(index, "unitPrice", e.target.value)
                         }
-                        placeholder="Amount"
+                        placeholder="Unit Price"
                       />
                     </td>
                     <td>
@@ -408,6 +460,34 @@ function VehicleDetails() {
                           handleServiceChange(index, "quantity", e.target.value)
                         }
                         placeholder="Quantity"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={service.vat.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}
+                        onChange={(e) =>
+                          handleServiceChange(index, "vat", e.target.value)
+                        }
+                        placeholder="VAT"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={service.subTotal.toLocaleString(undefined, { 
+                          minimumFractionDigits: 2, 
+                          maximumFractionDigits: 2 
+                        })}
+                        onChange={(e) =>
+                          handleServiceChange(index, "subTotal", e.target.value)
+                        }
+                       readOnly
                       />
                     </td>
                     <td>
@@ -433,8 +513,37 @@ function VehicleDetails() {
               type="number"
               className="form-control "
               name="paidAmount"
-              value={formData.paidAmount || ""}
+              value={formData.paidAmount.toLocaleString(undefined, { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+              }) || ""}
               onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="paid-amount-edit mb-3 pt-3 d-flex justify-content-between">
+            <label className="form-label col-md-4">Discount</label>
+            <input
+              type="number"
+              className="form-control "
+              name="discount"
+              value={formData.discount || ""}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="paid-amount-edit mb-3 pt-3 d-flex justify-content-between">
+            <label className="form-label col-md-4">Due Amount</label>
+            <input
+              type="number"
+              className="form-control "
+              name="dueAmount"
+              value={formData.dueAmount.toLocaleString(undefined, { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+              }) || ""}
+              onChange={handleInputChange}
+              readOnly
             />
           </div>
 

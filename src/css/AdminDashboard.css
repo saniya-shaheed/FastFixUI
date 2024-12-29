@@ -81,8 +81,9 @@ select option {
 }
 
 .dashboard-buttons button {
-  background-color: #7996ac;
-  color: #fff;
+  background-color: #fff;
+  color: #0b3f67;
+  border: 2px solid #0b3f67;
   height: 100px;
   font-size: 1rem;
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);

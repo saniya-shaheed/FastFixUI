@@ -114,7 +114,7 @@ function Vehicles() {
   // Calculate total expenses
   const calculateTotalAmount = () =>
     filteredVehicles.reduce(
-      (grandTotal, vehicle) => grandTotal + (vehicle.totalAmount || 0),
+      (grandTotal, vehicle) => grandTotal + (vehicle.dueAmount || 0),
       0
     );
   const calculatePendingAmount = () =>
@@ -174,7 +174,7 @@ function Vehicles() {
           </select>
         </div>
       </div>
-
+<p style={{color:"red"}}> Click on the row to get a customer's full details</p>
       <div style={{ overflowX: "auto" }} className="pt-md-3">
         <table className="table table-bordered bg-light">
           <thead className="">
@@ -203,11 +203,6 @@ function Vehicles() {
                     vehicle.pendingAmount !== 0 ? "#ddbab9" : "transparent",
                 }}
               >
-                <td className="text-center" style={{ width: "3%" }}>
-                  {" "}
-                  {index + 1}
-                </td>
-                <td className="text-center">{vehicle.vehicleId}</td>
                 {showCheckboxes && (
                   <td>
                     <input
@@ -218,6 +213,12 @@ function Vehicles() {
                     />
                   </td>
                 )}
+                <td className="text-center" style={{ width: "3%" }}>
+                  {" "}
+                  {index + 1}
+                </td>
+                <td className="text-center">{vehicle.vehicleId}</td>
+                
                 <td className="text-center">{formatDate(vehicle.date)}</td>
                 <td>{vehicle.customerName}</td>
                 <td className="text-center">{vehicle.phone}</td>
@@ -241,10 +242,16 @@ function Vehicles() {
                   </ul>
                 </td>
                 <td className=" text-center">
-                  {vehicle.totalAmount.toLocaleString()}
+                  {vehicle.dueAmount.toLocaleString(undefined, { 
+  minimumFractionDigits: 2, 
+  maximumFractionDigits: 2 
+})}
                 </td>
                 <td className=" text-center">
-                  {vehicle.pendingAmount.toLocaleString()}
+                  {vehicle.pendingAmount.toLocaleString(undefined, { 
+  minimumFractionDigits: 2, 
+  maximumFractionDigits: 2 
+})}
                 </td>
               </tr>
             ))}
@@ -254,7 +261,10 @@ function Vehicles() {
 
       <div className="customer-amount d-md-flex justify-content-between align-items-center mt-4">
         <h5>
-          <b>Total Amount: AED {calculateTotalAmount().toLocaleString()}</b>
+          <b>Total Amount: AED {calculateTotalAmount().toLocaleString(undefined, { 
+  minimumFractionDigits: 2, 
+  maximumFractionDigits: 2 
+})}</b>
         </h5>
         <h5
           style={{
@@ -263,7 +273,10 @@ function Vehicles() {
         >
           <b>
             Total Pending Amount: AED{" "}
-            {calculatePendingAmount().toLocaleString()}
+            {calculatePendingAmount().toLocaleString(undefined, { 
+  minimumFractionDigits: 2, 
+  maximumFractionDigits: 2 
+})}
           </b>
         </h5>
       </div>

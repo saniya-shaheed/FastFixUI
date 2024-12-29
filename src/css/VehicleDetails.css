@@ -21,6 +21,7 @@ th {
 .edit-print-buttons button {
   background-color: #0b3f67;
   color: #fff;
+  height: 60px;
 }
 
 .edit-print-buttons button:hover {
@@ -55,10 +56,18 @@ th {
   min-width: 600px; /* Set a minimum width for your table */
 }
 
+.amount-columns {
+  font-weight: bold;
+}
 @media (min-width: 576px) {
   .amounts {
     justify-content: space-between;
   }
+
+  .edit-print-buttons button {
+    height: 30px;
+  }
+  
 }
 @media (min-width: 768px) {
   .labels-at-top {

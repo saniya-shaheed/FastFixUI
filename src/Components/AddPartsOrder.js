@@ -81,6 +81,23 @@ function AddPartsOrder() {
     }
   };
 
+  const sendOrderViaWhatsApp = (contactNumber) => {
+    if (!orderData.orders || !Array.isArray(orderData.orders)) {
+      console.error('Order data is not properly initialized or is undefined.');
+      return;
+    }
+  
+    // Extract only items and quantities
+    const itemList = orderData.orders.map(order => `${order.item}: ${order.quantity}`).join('\n');
+  
+    // WhatsApp message URL
+    const whatsappMessage = `https://wa.me/${contactNumber}?text=${encodeURIComponent(itemList)}`;
+  
+    // Open WhatsApp
+    window.open(whatsappMessage, '_blank');
+  };
+  
+
   return (
     <section className="add-partorders p-4 p-md-5">
       <h1 className="new-order"> New Order </h1>
@@ -111,7 +128,7 @@ function AddPartsOrder() {
                   Item Name
                 </th>
                 <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-                  Amount <span className="text-secondary"> (AED) </span>
+                  Unit Price <span className="text-secondary"> (AED) </span>
                 </th>
                 <th style={{ border: "1px solid #ddd", padding: "8px" }}>
                   Quantity
@@ -144,7 +161,6 @@ function AddPartsOrder() {
                       name="amount"
                       value={order.amount}
                       onChange={(e) => handleServiceChange(index, e)}
-                      required
                     />
                   </td>
                   <td style={{ border: "1px solid #ddd", padding: "8px" }}>
@@ -221,7 +237,6 @@ function AddPartsOrder() {
               className="form-control"
               value={orderData.targetVehicle}
               onChange={handleChange}
-              required
             />
           </div>
           <div className="col-sm-6">
@@ -236,11 +251,20 @@ function AddPartsOrder() {
 
         <div className="d-sm-flex pt-sm-5 label-group"></div>
 
-        <div className="add-customer-button d-flex justify-content-sm-end p-sm-5 ps-sm-0 pe-sm-0">
-          <button className="btn col-12 col-sm-6" type="submit">
+        <div className="add-customer-button d-flex justify-content-sm-evenly p-sm-5 ps-sm-0 pe-sm-0">
+          <button className="btn col-12 col-sm-4" type="submit"
+         >
+          {/*  onClick={(e) => { 
+            e.preventDefault(); // Prevent form submission
+            sendOrderViaWhatsApp(orderData.contactNumber); // Call WhatsApp function
+          }}*/}
             {" "}
             Add Order{" "}
           </button>
+          <button className='btn col-sm-4' onClick={(e) => { 
+            e.preventDefault(); // Prevent form submission
+            sendOrderViaWhatsApp(orderData.contactNumber); // Call WhatsApp function
+          }}> Send Order </button>
         </div>
       </form>
     </section>

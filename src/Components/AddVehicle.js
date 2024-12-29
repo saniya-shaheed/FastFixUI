@@ -17,29 +17,55 @@ function AddVehicle() {
     paymentMethod: "",
     paidAmount: 0,
     vehicleAnalysis: "",
-    services: [{ serviceType: "", amount: 0, quantity: 1, totalPrice: 0 }],
+    services: [
+      {
+        serviceType: "",
+        unitPrice: 0,
+        quantity: 1,
+        vat: 0,
+        subTotal: 0,
+      },
+    ],
     spareParts: "",
+    discount: 0,
   });
 
   const [totalAmount, setTotalAmount] = useState(0);
+  const [dueAmount, setDueAmount] = useState(0);
   const [pendingAmount, setPendingAmount] = useState(0);
   const [completionDate, setCompletionDate] = useState(null);
   const [statusOfWork, setStatusOfWork] = useState("PROGRESS");
 
   useEffect(() => {
-    const calculatedTotalAmount = vehicleData.services.reduce(
-      (sum, service) => sum + service.totalPrice,
+    const updatedServices = vehicleData.services.map((service) => {
+      const calculatedVAT = 0.05 * service.unitPrice * service.quantity;
+      const calculatedSubTotal = calculatedVAT + service.unitPrice * service.quantity;
+      return {
+        ...service,
+        vat: service.vat !== undefined ? service.vat : calculatedVAT, // Explicitly allow 0 as a valid VAT value
+      subTotal: (service.vat !== undefined ? service.vat : calculatedVAT) + service.unitPrice * service.quantity,
+      };
+    });
+
+    const calculatedTotalAmount = updatedServices.reduce(
+      (sum, service) => sum + service.subTotal,
       0
     );
+
+    setVehicleData((prevState) => ({ ...prevState, services: updatedServices }));
     setTotalAmount(calculatedTotalAmount);
-    const calculatedPendingAmount =
-      calculatedTotalAmount - vehicleData.paidAmount;
+
+    const calculatedDueAmount = calculatedTotalAmount - vehicleData.discount;
+    const calculatedPendingAmount = calculatedDueAmount - vehicleData.paidAmount;
+
+    setDueAmount(calculatedDueAmount);
     setPendingAmount(calculatedPendingAmount);
+
     if (calculatedPendingAmount === 0 && calculatedTotalAmount > 0) {
       setCompletionDate(new Date().toLocaleDateString());
       setStatusOfWork("DONE");
     }
-  }, [vehicleData.services, vehicleData.paidAmount]);
+  }, [vehicleData.services, vehicleData.discount, vehicleData.paidAmount]);
 
   const statusStyle = {
     color: statusOfWork === "DONE" ? "green" : "red",
@@ -54,10 +80,21 @@ function AddVehicle() {
   const handleServiceChange = (index, e) => {
     const { name, value } = e.target;
     const updatedServices = [...vehicleData.services];
-    updatedServices[index][name] = value;
-    updatedServices[index].totalPrice =
-      updatedServices[index].amount * updatedServices[index].quantity;
-    setVehicleData({ ...vehicleData, services: updatedServices });
+    const parsedValue = name === "unitPrice" || name === "quantity" || name === "vat" ? parseFloat(value) || 0 : value;
+  
+    updatedServices[index][name] = parsedValue;
+  
+    // Correct VAT calculation
+    if (name === "unitPrice" || name === "quantity") {
+      updatedServices[index].vat = 0.05 * updatedServices[index].unitPrice * updatedServices[index].quantity;
+    }
+  
+    // Update subtotal based on VAT, unit price, and quantity
+    updatedServices[index].subTotal =
+    (name === "vat" ? parsedValue : updatedServices[index].vat) +
+    updatedServices[index].unitPrice * updatedServices[index].quantity;
+
+  setVehicleData({ ...vehicleData, services: updatedServices });
   };
 
   const addServiceField = () => {
@@ -65,7 +102,7 @@ function AddVehicle() {
       ...vehicleData,
       services: [
         ...vehicleData.services,
-        { serviceType: "", amount: 0, quantity: 1, totalPrice: 0 },
+        { serviceType: "", unitPrice: 0, quantity: 1, vat: 0, subTotal: 0 },
       ],
     });
   };
@@ -74,6 +111,10 @@ function AddVehicle() {
     e.preventDefault();
     const vehicleToAdd = {
       ...vehicleData,
+      totalAmount,
+      dueAmount,
+      completionDate,
+      statusOfWork,
     };
     axios
       .post(`${API_BASE_URL}/api/vehicles`, vehicleToAdd)
@@ -90,9 +131,8 @@ function AddVehicle() {
   const startDate = formatDate(new Date().toLocaleDateString());
 
   const pendingAmountStyle = {
-    color: pendingAmount == "0" ? "black" : "red",
+    color: pendingAmount === 0 ? "black" : "red",
   };
-
   return (
     <section className="add-vehicle p-4 p-md-5">
       <h1> New Customer </h1>
@@ -201,7 +241,10 @@ function AddVehicle() {
                   Quantity
                 </th>
                 <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-                  Total <span className="text-secondary"> (AED) </span>
+                  VAT
+                </th>
+                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  Sub Total <span className="text-secondary"> (AED) </span>
                 </th>
                 <th style={{ border: "1px solid #ddd", padding: "8px" }}>
                   Add
@@ -214,56 +257,22 @@ function AddVehicle() {
                   <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                     <input
                       className=""
-                      list="serviceTypes"
                       type="text"
                       name="serviceType"
                       value={service.serviceType}
-                      onChange={(e) => {
-                        handleServiceChange(index, e);
-                        const selectedService = e.target.value;
-                        let amount = 0;
-                        switch (selectedService) {
-                          case "Oil Change":
-                            amount = 300;
-                            break;
-                          case "Tire Rotation":
-                            amount = 200;
-                            break;
-                          case "Brake Inspection":
-                            amount = 150;
-                            break;
-                          case "Battery Check":
-                            amount = 100;
-                            break;
-                          case "Engine Tune-up":
-                            amount = 500;
-                            break;
-                          default:
-                            amount = service.amount;
-                        }
-                        handleServiceChange(index, {
-                          target: { name: "amount", value: amount },
-                        });
-                      }}
-                      required
-                    />
-                    <datalist id="serviceTypes">
-                      <option value="Oil Change" />
-                      <option value="Tire Rotation" />
-                      <option value="Brake Inspection" />
-                      <option value="Battery Check" />
-                      <option value="Engine Tune-up" />
-                    </datalist>
-                  </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                    <input
-                      className=""
-                      type="number"
-                      name="amount"
-                      value={service.amount}
                       onChange={(e) => handleServiceChange(index, e)}
                       required
                     />
+                  </td>
+                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <input
+                type="number"
+                name="unitPrice"
+                value={service.unitPrice}
+                onChange={(e) => handleServiceChange(index, e)}
+                placeholder="Unit Price"
+                required
+              />
                   </td>
                   <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                     <input
@@ -276,13 +285,23 @@ function AddVehicle() {
                     />
                   </td>
                   <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                    <input
-                      type="number"
-                      className="form-control "
-                      style={{ width: "13rem" }}
-                      value={service.totalPrice}
-                      readOnly
-                    />
+                  <input
+              type="number"
+              name="vat"
+              value={service.vat}
+              onChange={(e) => handleServiceChange(index, e)}
+              placeholder="VAT"
+            />
+             
+                  </td>
+                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <input
+                type="number"
+                name="subTotal"
+                value={service.subTotal}
+                readOnly
+                placeholder="Subtotal"
+              />
                   </td>
                   <td
                     className="add-service-button"
@@ -333,6 +352,27 @@ function AddVehicle() {
                 <b>{totalAmount}</b>
               </p>
             </p>
+          </div>
+        
+          <div className="col-sm-4">
+            <p>
+              <b> Due Amount </b>
+              <span className="text-secondary"> (AED) </span> :
+              <p className="form-control">
+                <b>{dueAmount}</b>
+              </p>
+            </p>
+          </div>
+
+          <div className=" col-sm-3 ">
+            <label>Discount:</label>
+            <input
+              type="number"
+              name="discount"
+              className="form-control"
+              value={vehicleData.discount}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="col-sm-4">

@@ -61,7 +61,7 @@ function AdminDashboard() {
       );
 
       const totalRevenue = filteredRevenues.reduce(
-        (total, vehicle) => total + (vehicle.totalAmount || 0),
+        (total, vehicle) => total + (vehicle.dueAmount || 0),
         0
       );
 
@@ -104,7 +104,7 @@ function AdminDashboard() {
         );
 
         const totalRevenues = monthRevenues.reduce(
-          (total, vehicle) => total + (vehicle.totalAmount || 0),
+          (total, vehicle) => total + (vehicle.dueAmount || 0),
           0
         );
 
@@ -593,7 +593,7 @@ function AdminDashboard() {
             <div class="row mt-4 dashboard-buttons">
               <div class="col-4 text-center">
                 <button
-                  class="btn btn-primary w-100"
+                  class="btn w-100"
                   onClick={() => navigate("/add-vehicle")}
                 >
                   Add Customer
@@ -601,15 +601,15 @@ function AdminDashboard() {
               </div>
               <div class="col-4 text-center">
                 <button
-                  class="btn btn-primary w-100"
+                  class="btn  w-100"
                   onClick={() => navigate("/expenses/add-expense")}
                 >
                   Add Expense
                 </button>
               </div>
-              <div class="col-4 text-center">
+              <div class="col-4  text-center">
                 <button
-                  class="btn btn-primary w-100"
+                  class="btn  w-100"
                   onClick={() => navigate("/add-employee")}
                 >
                   Add Employee
