@@ -216,7 +216,7 @@ function AddPartsOrder() {
             />
           </div>
           <div className=" col-sm-6">
-            <label>Contact No:</label>
+            <label>Supplier's Contact No:</label>
             <input
               type="text"
               name="phone"
@@ -225,6 +225,9 @@ function AddPartsOrder() {
               onChange={handleChange}
               required
             />
+            <p style={{color:"red", fontSize:"0.75rem"}}> 
+              Enter the Whatsapp number with country code +971 to send an order to supplier.
+            </p>
           </div>
         </div>
 
