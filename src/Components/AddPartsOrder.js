@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { formatDate } from "./FormateDate";
 import "../css/AddVehicle.css";
 import "../css/PartOrders.css";
 import { API_BASE_URL } from "../apiConfig";
@@ -50,10 +49,9 @@ function AddPartsOrder() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
     try {
-      // Prepare the data for the API call
       const orderPayload = {
         parts: orderData.orders,
         supplier: orderData.supplier,
@@ -61,21 +59,17 @@ function AddPartsOrder() {
         targetVehicle: orderData.targetVehicle,
       };
 
-      // Send a POST request to the API endpoint
       const response = await axios.post(
         `${API_BASE_URL}/api/part-orders`,
         orderPayload
       );
 
       if (response.status === 201) {
-        // Success: Display a success message or redirect
         alert("Order created successfully!");
 
-        // Optionally navigate to another page or reset the form
-        navigate("/part-orders"); // Replace '/orders' with your desired route
+        navigate("/part-orders"); 
       }
     } catch (error) {
-      // Handle errors
       console.error("Error creating order:", error);
       alert("Failed to create the order. Please try again.");
     }
@@ -87,13 +81,10 @@ function AddPartsOrder() {
       return;
     }
   
-    // Extract only items and quantities
     const itemList = orderData.orders.map(order => `${order.item}: ${order.quantity}`).join('\n');
   
-    // WhatsApp message URL
     const whatsappMessage = `https://wa.me/${contactNumber}?text=${encodeURIComponent(itemList)}`;
   
-    // Open WhatsApp
     window.open(whatsappMessage, '_blank');
   };
   
@@ -124,19 +115,19 @@ function AddPartsOrder() {
           >
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Item Name
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Unit Price <span className="text-secondary"> (AED) </span>
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Quantity
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Total <span className="text-secondary"> (AED) </span>
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Add
                 </th>
               </tr>
@@ -144,7 +135,7 @@ function AddPartsOrder() {
             <tbody>
               {orderData.orders.map((order, index) => (
                 <tr key={index}>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       className=""
                       type="text"
@@ -154,7 +145,7 @@ function AddPartsOrder() {
                       required
                     />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       className=""
                       type="number"
@@ -163,7 +154,7 @@ function AddPartsOrder() {
                       onChange={(e) => handleServiceChange(index, e)}
                     />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       className=""
                       type="number"
@@ -173,7 +164,7 @@ function AddPartsOrder() {
                       required
                     />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       type="number"
                       className="form-control "
@@ -255,17 +246,14 @@ function AddPartsOrder() {
         <div className="d-sm-flex pt-sm-5 label-group"></div>
 
         <div className="add-customer-button d-flex justify-content-sm-evenly p-sm-5 ps-sm-0 pe-sm-0">
-          <button className="btn col-12 col-sm-4" type="submit"
+          <button className="btn col-12 col-sm-4" type="submit" 
          >
-          {/*  onClick={(e) => { 
-            e.preventDefault(); // Prevent form submission
-            sendOrderViaWhatsApp(orderData.contactNumber); // Call WhatsApp function
-          }}*/}
+            
             {" "}
             Add Order{" "}
           </button>
           <button className='btn col-sm-4' onClick={(e) => { 
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault(); 
             sendOrderViaWhatsApp(orderData.contactNumber); // Call WhatsApp function
           }}> Send Order </button>
         </div>

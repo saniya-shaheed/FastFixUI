@@ -10,6 +10,11 @@
   color: "#007bff";
 }
 
+.border-padding {
+  border: "1px solid #ddd"; 
+  padding: "8px";
+}
+
 @media (min-width: 2560px) {
   .part-orders,
   .part-details,
