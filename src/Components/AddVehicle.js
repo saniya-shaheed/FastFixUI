@@ -370,7 +370,8 @@ function AddVehicle() {
               </p>
             </p>
           </div>
-
+          </div>
+          <div className="d-sm-flex pt-sm-5 pt-xl-4 label-group">
           <div className=" col-sm-3 ">
             <label>Discount:</label>
             <input
