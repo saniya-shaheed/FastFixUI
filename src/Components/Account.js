@@ -9,9 +9,9 @@ function Account() {
   useEffect(() => {
     const fetchUsernames = async () => {
       try {
-        // Retrieve the token using the correct key "authToken"
+        // Retrieving the token
         const token = localStorage.getItem("authToken");
-        console.log("current token:", token); // Debugging: confirm token is fetched
+        console.log("current token:", token); 
 
         if (!token) {
           console.error("Token not found. User is not logged in.");
@@ -45,7 +45,7 @@ function Account() {
     <section className="account-section p-3 p-md-5">
       <h1>Account </h1>
       <hr />
-      <p className="pt-xl-4">
+      <div className="pt-xl-4">
         <h6 className="users-list pb-xl-2">List of users of FastFix :</h6>
         {usernames.length > 0 ? (
           <ul className="ps-0 ">
@@ -58,7 +58,7 @@ function Account() {
         ) : (
           <p>No users found.</p>
         )}
-      </p>
+      </div>
     </section>
   );
 }
