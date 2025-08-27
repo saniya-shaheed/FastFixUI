@@ -8,7 +8,7 @@ import Vehicles from "./Components/Vehicles";
 import AddVehicle from "./Components/AddVehicle";
 import Expenses from "./Components/Expenses";
 import AddExpense from "./Components/AddExpense";
-import Layout from "./Components/Layout"; // Import your Layout component
+import Layout from "./Components/Layout"; 
 import VehicleDetails from "./Components/VehicleDetails";
 import AdminHome from "./Pages/AdminHome";
 import AdminDashboard from "./Components/AdminDashboard";
@@ -31,7 +31,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check authToken and initialize login state
     const token = localStorage.getItem("authToken");
     const storedUsername = localStorage.getItem("username");
 
@@ -40,12 +39,6 @@ function App() {
       setUsername(storedUsername);
     }
   }, []);
-
-  const handleLogout = () => {
-    // Clear authentication tokens and related session data
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-  };
 
   return (
     <Router>
