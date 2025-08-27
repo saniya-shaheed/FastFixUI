@@ -78,24 +78,31 @@ function AddVehicle() {
   };
 
   const handleServiceChange = (index, e) => {
-    const { name, value } = e.target;
-    const updatedServices = [...vehicleData.services];
-    const parsedValue = name === "unitPrice" || name === "quantity" || name === "vat" ? parseFloat(value) || 0 : value;
-  
+  const { name, value } = e.target;
+  const updatedServices = [...vehicleData.services];
+
+  if (name === "unitPrice" || name === "quantity") {
+    const parsedValue = parseFloat(value) || 0;
     updatedServices[index][name] = parsedValue;
-  
-    // Correct VAT calculation
-    if (name === "unitPrice" || name === "quantity") {
+
+    // Auto-calculate VAT by default (5% of unitPrice * quantity) if user hasn't manually changed it
+    if (!updatedServices[index].vatManuallySet) {
       updatedServices[index].vat = 0.05 * updatedServices[index].unitPrice * updatedServices[index].quantity;
     }
-  
-    // Update subtotal based on VAT, unit price, and quantity
-    updatedServices[index].subTotal =
-    (name === "vat" ? parsedValue : updatedServices[index].vat) +
-    updatedServices[index].unitPrice * updatedServices[index].quantity;
+  } else if (name === "vat") {
+    // If user changes VAT manually, mark it
+    updatedServices[index].vat = parseFloat(value) || 0;
+    updatedServices[index].vatManuallySet = true;
+  } else {
+    updatedServices[index][name] = value;
+  }
+
+  // Update subtotal
+  updatedServices[index].subTotal = updatedServices[index].unitPrice * updatedServices[index].quantity + updatedServices[index].vat;
 
   setVehicleData({ ...vehicleData, services: updatedServices });
-  };
+};
+
 
   const addServiceField = () => {
     setVehicleData({
