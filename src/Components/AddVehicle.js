@@ -38,7 +38,6 @@ function AddVehicle() {
  useEffect(() => {
     const updatedServices = vehicleData.services.map((service) => {
       const calculatedVAT = 0.05 * service.unitPrice * service.quantity;
-      const calculatedSubTotal = calculatedVAT + service.unitPrice * service.quantity;
       return {
         ...service,
         vat: service.vat !== undefined ? service.vat : calculatedVAT, // Explicitly allow 0 as a valid VAT value
@@ -238,22 +237,22 @@ function AddVehicle() {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Type of Service
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Amount <span className="text-secondary"> (AED) </span>
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Quantity
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   VAT
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Sub Total <span className="text-secondary"> (AED) </span>
                 </th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <th class="border-padding">
                   Add
                 </th>
               </tr>
@@ -261,7 +260,7 @@ function AddVehicle() {
             <tbody>
               {vehicleData.services.map((service, index) => (
                 <tr key={index}>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       className=""
                       type="text"
@@ -271,7 +270,7 @@ function AddVehicle() {
                       required
                     />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td sclass="border-padding">
                   <input
                 type="number"
                 name="unitPrice"
@@ -281,7 +280,7 @@ function AddVehicle() {
                 required
               />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                     <input
                       className=""
                       type="number"
@@ -291,7 +290,7 @@ function AddVehicle() {
                       required
                     />
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                   <input
               type="number"
               name="vat"
@@ -301,7 +300,7 @@ function AddVehicle() {
             />
              
                   </td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                  <td class="border-padding">
                   <input
                 type="number"
                 name="subTotal"

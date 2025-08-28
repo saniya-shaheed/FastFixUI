@@ -42,6 +42,11 @@ p {
   background-color: #fff;
   color: #0b3f67;
 }
+
+.border-padding {
+  border: "1px solid #ddd"; 
+  padding: "8px";
+}
 @media (min-width: 576px) {
   .label-group {
     justify-content: space-between;
