@@ -10,7 +10,7 @@ import Expenses from "./Components/Expenses";
 import AddExpense from "./Components/AddExpense";
 import Layout from "./Components/Layout"; 
 import VehicleDetails from "./Components/VehicleDetails";
-import AdminHome from "./Pages/AdminHome";
+import AdminHome from "./Components/AdminHome";
 import AdminDashboard from "./Components/AdminDashboard";
 import Employees from "./Components/Employees";
 import AddEmployee from "./Components/AddEmployee";
@@ -58,7 +58,6 @@ function App() {
           }
         />
 
-        {/* Protected Routes */}
         {isLoggedIn ? (
           <>
             <Route

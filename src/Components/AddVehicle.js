@@ -35,8 +35,7 @@ function AddVehicle() {
   const [pendingAmount, setPendingAmount] = useState(0);
   const [completionDate, setCompletionDate] = useState(null);
   const [statusOfWork, setStatusOfWork] = useState("PROGRESS");
-
-  useEffect(() => {
+ useEffect(() => {
     const updatedServices = vehicleData.services.map((service) => {
       const calculatedVAT = 0.05 * service.unitPrice * service.quantity;
       const calculatedSubTotal = calculatedVAT + service.unitPrice * service.quantity;
@@ -66,6 +65,7 @@ function AddVehicle() {
       setStatusOfWork("DONE");
     }
   }, [vehicleData.services, vehicleData.discount, vehicleData.paidAmount]);
+ 
 
   const statusStyle = {
     color: statusOfWork === "DONE" ? "green" : "red",

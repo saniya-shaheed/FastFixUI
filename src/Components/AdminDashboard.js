@@ -278,7 +278,7 @@ function AdminDashboard() {
         </div>
       ) : (
         <div className="dashboard">
-          <h1>Dashboard</h1>
+          <h1>Summary</h1>
           <hr />
           <div className="dropdown month-year-dashboard d-flex justify-content-between align-items-center">
             <div className="today-date">
